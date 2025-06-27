@@ -6,10 +6,13 @@ import com.booking.userservice.dto.response.ResponseSuccess;
 import com.booking.userservice.dto.response.UserResponse;
 import com.booking.userservice.service.UserService;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.Min;
 import java.util.List;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
+import org.modelmapper.internal.bytebuddy.implementation.bind.annotation.Default;
+import org.springframework.boot.context.properties.bind.DefaultValue;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
@@ -43,7 +46,9 @@ public class UserController {
 
 
   @GetMapping
-  ResponseSuccess getAllUsers(@RequestParam int page, @RequestParam int size) {
+  ResponseSuccess getAllUsers(
+      @RequestParam(defaultValue = "0") @Min(1) int page,
+      @RequestParam(defaultValue = "10")  @Min(0) int size) {
 
     Pageable pageable = PageRequest.of(page, size);
 
