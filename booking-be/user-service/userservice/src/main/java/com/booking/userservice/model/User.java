@@ -45,6 +45,6 @@ public class User {
   @UpdateTimestamp
   private LocalDateTime updatedAt;
   private LocalDateTime deletedAt;
-  private boolean isDeleted = false;
+  private boolean isDeleted;
 
 }
