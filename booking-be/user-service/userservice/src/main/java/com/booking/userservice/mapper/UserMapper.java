@@ -40,7 +40,6 @@ public class UserMapper {
   public UserResponse toUserReponse(User req) {
     return UserResponse.builder()
         .username(req.getUsername())
-        .password(req.getPassword())
         .fullName(req.getFullName())
         .email(req.getEmail())
         .phoneNumber(req.getPhoneNumber())

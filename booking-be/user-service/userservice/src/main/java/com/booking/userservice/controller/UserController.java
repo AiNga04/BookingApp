@@ -1,6 +1,7 @@
 package com.booking.userservice.controller;
 
 import com.booking.userservice.dto.request.CreateUserRequest;
+import com.booking.userservice.dto.request.LoginRequest;
 import com.booking.userservice.dto.request.UpdateUserRequest;
 import com.booking.userservice.dto.response.ResponseSuccess;
 import com.booking.userservice.dto.response.UserResponse;
@@ -44,11 +45,18 @@ public class UserController {
     return new ResponseSuccess(HttpStatus.CREATED, "User created successfully");
   }
 
+  @PostMapping("/validate-credentials")
+  UserResponse validateCredentials(@Valid @RequestBody LoginRequest req) {
+    UserResponse userResponse = userService.validateCredentials(req);
+
+    return userResponse;
+  }
+
 
   @GetMapping
   ResponseSuccess getAllUsers(
-      @RequestParam(defaultValue = "0") @Min(1) int page,
-      @RequestParam(defaultValue = "10")  @Min(0) int size) {
+      @RequestParam(defaultValue = "0", required = false) @Min(0) int page,
+      @RequestParam(defaultValue = "10", required = false)  @Min(0) int size) {
 
     Pageable pageable = PageRequest.of(page, size);
 

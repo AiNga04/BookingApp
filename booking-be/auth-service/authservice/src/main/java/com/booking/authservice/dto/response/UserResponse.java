@@ -1,4 +1,4 @@
-package com.booking.userservice.dto.response;
+package com.booking.authservice.dto.response;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -6,7 +6,6 @@ import lombok.Builder;
 import lombok.Data;
 
 @Data
-@Builder
 public class UserResponse {
 
   private Long id;
