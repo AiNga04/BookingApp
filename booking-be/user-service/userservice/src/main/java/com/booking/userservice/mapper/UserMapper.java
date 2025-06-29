@@ -1,5 +1,6 @@
 package com.booking.userservice.mapper;
 
+import com.booking.userservice.dto.request.CreateUserAccountRequest;
 import com.booking.userservice.dto.request.CreateUserRequest;
 import com.booking.userservice.dto.request.UpdateUserRequest;
 import com.booking.userservice.dto.response.UserResponse;
@@ -22,6 +23,15 @@ public class UserMapper {
         .gender(req.getGender() ? Gender.MALE : Gender.FEMALE)
         .isEmailVerified(false)
         .isDeleted(false)
+        .build();
+  }
+
+  public User toUser(CreateUserAccountRequest req) {
+    return User.builder()
+        .username(req.getUsername())
+        .email(req.getEmail())
+        .password(req.getPassword())
+        .fullName(req.getFirstName() + " " + req.getLastName())
         .build();
   }
 
@@ -49,4 +59,6 @@ public class UserMapper {
         .isDeleted(false)
         .build();
   }
+
+
 }

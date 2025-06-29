@@ -1,9 +1,11 @@
 package com.booking.userservice.service;
 
+import com.booking.userservice.dto.request.CreateUserAccountRequest;
 import com.booking.userservice.dto.request.CreateUserRequest;
 import com.booking.userservice.dto.request.LoginRequest;
 import com.booking.userservice.dto.request.UpdateUserRequest;
 import com.booking.userservice.dto.response.UserResponse;
+import com.booking.userservice.exception.PasswordsNotMatchException;
 import com.booking.userservice.exception.UserAlreadyExistsException;
 import com.booking.userservice.exception.UserNotFoundException;
 import com.booking.userservice.mapper.UserMapper;
@@ -30,14 +32,15 @@ public class UserService {
   UserMapper userMapper;
 
 
-  public void createUser(CreateUserRequest req) throws UserAlreadyExistsException {
+  public void createUser(CreateUserRequest req) throws UserAlreadyExistsException, PasswordsNotMatchException {
     boolean exists = userRepository.findByUsername(req.getUsername()).isPresent();
 
     if (exists) {
-      throw new UserAlreadyExistsException("User already exists with username: " + req.getUsername());
+      throw new UserAlreadyExistsException(
+          "User already exists with username: " + req.getUsername());
     }
-    if (!req.getPassword().equals(req.getPassword())) {
-      throw new UserAlreadyExistsException("Password does not match");
+    if (!req.getPassword().equals(req.getRePassword())) {
+      throw new PasswordsNotMatchException();
     }
     User newUser = userMapper.toUser(req);
     newUser.setPassword(passwordEncoder.encode(newUser.getPassword()));
@@ -58,7 +61,7 @@ public class UserService {
         .orElseThrow(() -> new UserNotFoundException("User not found with username: " + username));
 
     return userMapper.toUserReponse(user);
-   }
+  }
 
 
   public List<UserResponse> getAllUsers(Pageable pageable) {
@@ -94,15 +97,29 @@ public class UserService {
 
   public UserResponse validateCredentials(LoginRequest req) throws UserNotFoundException {
     User user = userRepository.findByUsername(req.getUsername())
-        .orElseThrow(() -> new UserNotFoundException("User not found with username: " + req.getUsername()));
+        .orElseThrow(
+            () -> new UserNotFoundException("User not found with username: " + req.getUsername()));
 
     boolean checkPassword = passwordEncoder.matches(req.getPassword(), user.getPassword());
 
-    if(!checkPassword) {
+    if (!checkPassword) {
       throw new UserNotFoundException("Password is not correct");
     }
 
     return userMapper.toUserReponse(user);
+  }
+
+  public UserResponse createUserAccount(CreateUserAccountRequest req)
+      throws PasswordsNotMatchException {
+
+    if (!req.getPassword().equals(req.getRePassword())) {
+      throw new PasswordsNotMatchException();
+    }
+
+    User user = userMapper.toUser(req);
+    user.setPassword(passwordEncoder.encode(req.getPassword()));
+
+    return userMapper.toUserReponse(userRepository.saveAndFlush(user));
   }
 
 

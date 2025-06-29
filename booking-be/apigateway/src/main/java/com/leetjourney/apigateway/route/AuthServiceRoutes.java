@@ -21,6 +21,9 @@ public class AuthServiceRoutes {
         .route(RequestPredicates.POST("/api/v1/auth/login"),
             request -> forwardRequest(request,
                 "http://localhost:8081/api/v1/auth/login"))
+        .route(RequestPredicates.POST("/api/v1/auth/register"),
+            request -> forwardRequest(request,
+                "http://localhost:8081/api/v1/auth/register"))
 
         .build();
   }

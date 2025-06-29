@@ -1,6 +1,6 @@
-package com.booking.userservice.exception;
+package com.booking.hotelservice.exception;
 
-import com.booking.userservice.dto.response.ResponseFailure;
+import com.booking.hotelservice.dto.ResponseFailure;
 import java.util.HashMap;
 import java.util.Map;
 import org.springframework.http.HttpStatus;
@@ -12,19 +12,10 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 @ControllerAdvice
 public class GlobalExceptionHandler {
 
-  @ExceptionHandler({UserNotFoundException.class})
-  public ResponseFailure handleStudentNotFoundException(UserNotFoundException exception) {
+
+  @ExceptionHandler({ResourceNotFoundException.class})
+  public ResponseFailure handleResourceNotFoundException(ResourceNotFoundException exception) {
     return new ResponseFailure(HttpStatus.NOT_FOUND, exception.getMessage());
-  }
-
-  @ExceptionHandler({UserAlreadyExistsException.class})
-  public ResponseFailure handleStudentAlreadyExistsException(UserAlreadyExistsException exception) {
-    return new ResponseFailure(HttpStatus.CONFLICT, exception.getMessage());
-  }
-
-  @ExceptionHandler(PasswordsNotMatchException.class)
-  public ResponseFailure handlePasswordsNotMatchException(PasswordsNotMatchException exception) {
-    return new ResponseFailure(HttpStatus.BAD_REQUEST, exception.getMessage());
   }
 
   @ExceptionHandler({RuntimeException.class})

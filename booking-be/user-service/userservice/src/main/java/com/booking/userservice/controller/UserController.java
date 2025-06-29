@@ -1,5 +1,6 @@
 package com.booking.userservice.controller;
 
+import com.booking.userservice.dto.request.CreateUserAccountRequest;
 import com.booking.userservice.dto.request.CreateUserRequest;
 import com.booking.userservice.dto.request.LoginRequest;
 import com.booking.userservice.dto.request.UpdateUserRequest;
@@ -45,14 +46,6 @@ public class UserController {
     return new ResponseSuccess(HttpStatus.CREATED, "User created successfully");
   }
 
-  @PostMapping("/validate-credentials")
-  UserResponse validateCredentials(@Valid @RequestBody LoginRequest req) {
-    UserResponse userResponse = userService.validateCredentials(req);
-
-    return userResponse;
-  }
-
-
   @GetMapping
   ResponseSuccess getAllUsers(
       @RequestParam(defaultValue = "0", required = false) @Min(0) int page,
@@ -89,6 +82,19 @@ public class UserController {
       userService.deleteUser(id);
       return new ResponseSuccess(HttpStatus.OK, "Hard delete user successfully");
     }
+  }
+
+  @PostMapping("/validate-credentials")
+  UserResponse validateCredentials(@Valid @RequestBody LoginRequest req) {
+    UserResponse userResponse = userService.validateCredentials(req);
+
+    return userResponse;
+  }
+
+  @PostMapping("/register")
+  UserResponse createUserAccount(@Valid @RequestBody CreateUserAccountRequest req) {
+    UserResponse userResponse = userService.createUserAccount(req);
+    return userResponse;
   }
 
 
