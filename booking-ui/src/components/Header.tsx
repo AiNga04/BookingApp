@@ -2,14 +2,24 @@
 
 import React, { useRef } from "react";
 import { IoAirplane, IoMenu } from "react-icons/io5";
+import { useRouter } from "next/navigation";
 
-const Header = () => {
+const Header: React.FC = () => {
+  const router = useRouter();
   const mobileMenuRef = useRef<HTMLDivElement>(null);
 
   const handleToggleMenu = () => {
     if (mobileMenuRef.current) {
       mobileMenuRef.current.classList.toggle("hidden");
     }
+  };
+
+  const handleClickLogin = () => {
+    router.push("/auth/login");
+  };
+
+  const handleClickRegister = () => {
+    router.push("/auth/register");
   };
 
   return (
@@ -60,10 +70,16 @@ const Header = () => {
         </ul>
         {/* Buttons */}
         <div className="hidden md:flex space-x-4">
-          <button className="text-gray-700 px-4 py-2 rounded-lg hover:bg-gray-100 transition">
+          <button
+            className="text-gray-700 px-4 py-2 rounded-lg hover:bg-gray-100 transition"
+            onClick={handleClickLogin}
+          >
             Sign In
           </button>
-          <button className="bg-yellow-500 text-white px-6 py-2 rounded-lg hover:bg-yellow-600 transition shadow-md">
+          <button
+            className="bg-yellow-500 text-white px-6 py-2 rounded-lg hover:bg-yellow-600 transition shadow-md"
+            onClick={handleClickRegister}
+          >
             Sign Up
           </button>
         </div>
@@ -78,7 +94,7 @@ const Header = () => {
       {/* Mobile menu */}
       <div
         ref={mobileMenuRef}
-        className="hidden flex flex-col space-y-4 p-4 md:hidden bg-white border-t border-gray-100"
+        className="hidden flex-col space-y-4 p-4 md:hidden bg-white border-t border-gray-100"
       >
         <a
           href="#destinations"
@@ -105,10 +121,16 @@ const Header = () => {
           Testimonials
         </a>
         <div className="flex flex-col gap-y-4 pt-2">
-          <button className="text-gray-700 py-2 rounded-lg hover:bg-gray-100 transition">
+          <button
+            className="text-gray-700 py-2 rounded-lg hover:bg-gray-100 transition"
+            onClick={handleClickLogin}
+          >
             Sign In
           </button>
-          <button className="bg-yellow-500 text-white py-2 rounded-lg hover:bg-yellow-600 transition shadow-md">
+          <button
+            className="bg-yellow-500 text-white py-2 rounded-lg hover:bg-yellow-600 transition shadow-md"
+            onClick={handleClickRegister}
+          >
             Sign Up
           </button>
         </div>
