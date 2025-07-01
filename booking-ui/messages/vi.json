@@ -1,0 +1,87 @@
+{
+  "login": {
+    "title": "Đăng nhập vào tài khoản của bạn",
+    "username": "Tên đăng nhập",
+    "password": "Mật khẩu",
+    "remember": "Ghi nhớ đăng nhập",
+    "forgot": "Quên mật khẩu?",
+    "submit": "Đăng nhập",
+    "no_account": "Chưa có tài khoản?",
+    "signup": "Đăng ký",
+    "success": "Đăng nhập thành công!",
+    "fail": "Đăng nhập thất bại",
+    "username_required": "Vui lòng nhập tên đăng nhập",
+    "password_required": "Vui lòng nhập mật khẩu"
+  },
+
+  "register": {
+    "title": "Tạo tài khoản mới",
+    "username": "Tên đăng nhập",
+    "firstName": "Tên",
+    "lastName": "Họ",
+    "email": "Email",
+    "password": "Mật khẩu",
+    "rePassword": "Nhập lại mật khẩu",
+    "submit": "Đăng ký",
+    "success": "Đăng ký thành công!",
+    "fail": "Đăng ký thất bại",
+    "firstName_required": "Vui lòng nhập tên",
+    "lastName_required": "Vui lòng nhập họ",
+    "email_required": "Vui lòng nhập email",
+    "email_invalid": "Email không hợp lệ",
+    "username_required": "Vui lòng nhập tên đăng nhập",
+    "password_required": "Vui lòng nhập mật khẩu",
+    "password_min": "Mật khẩu phải có ít nhất 6 ký tự",
+    "rePassword_required": "Vui lòng nhập lại mật khẩu",
+    "rePassword_not_match": "Mật khẩu không khớp",
+    "already_have_account": "Đã có tài khoản?",
+    "login": "Đăng nhập"
+  },
+
+  "header": {
+    "home": "Trang chủ",
+    "about": "Giới thiệu",
+    "contact": "Liên hệ",
+    "login": "Đăng nhập",
+    "register": "Đăng ký",
+    "destinations": "Điểm đến",
+    "services": "Dịch vụ",
+    "blog": "Blog",
+    "logout": "Đăng xuất",
+    "language": "Ngôn ngữ",
+    "switch_language": "Chuyển đổi ngôn ngữ",
+    "en": "Tiếng Anh",
+    "vi": "Tiếng Việt",
+    "booking": "Đặt chỗ",
+    "testimonials": "Lời chứng thực"
+  },
+
+  "footer": {
+    "brand": "Booking",
+    "slogan": "Đặt chuyến đi của bạn chỉ trong vài phút, kiểm soát toàn bộ trong thời gian dài.",
+    "company": "Công ty",
+    "about": "Về chúng tôi",
+    "careers": "Tuyển dụng",
+    "mobile": "Di động",
+    "contact": "Liên hệ",
+    "help": "Trợ giúp/Câu hỏi thường gặp",
+    "press": "Báo chí",
+    "partners": "Đối tác",
+    "more": "Thêm",
+    "destinations": "Điểm đến",
+    "blog": "Blog",
+    "sustainability": "Bền vững",
+    "copyright": "© 2025 Booking. Mọi quyền được bảo lưu.",
+    "terms": "Điều khoản dịch vụ",
+    "privacy": "Chính sách quyền riêng tư",
+    "cookie": "Cài đặt cookie"
+  },
+
+  "hero": {
+    "bestDestinations": "NHỮNG ĐIỂM ĐẾN TUYỆT VỜI TRÊN TOÀN THẾ GIỚI",
+    "headline": "Du lịch, tận hưởng và sống một cuộc đời mới trọn vẹn",
+    "desc": "Khám phá những địa điểm tuyệt vời với các ưu đãi độc quyền. Hãy đến những điểm đến mang tính biểu tượng nhất với dịch vụ cao cấp và hỗ trợ xuyên suốt hành trình của bạn.",
+    "explore": "Khám phá ngay",
+    "watchDemo": "Xem demo"
+  }
+}

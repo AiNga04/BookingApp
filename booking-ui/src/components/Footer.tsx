@@ -6,8 +6,11 @@ import {
   IoLogoInstagram,
   IoLogoTwitter,
 } from "react-icons/io5";
+import { useTranslations } from "next-intl";
 
 const Footer = () => {
+  const t = useTranslations("footer");
+
   return (
     <footer className="bg-gray-50 pt-20 pb-10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -19,11 +22,9 @@ const Footer = () => {
               className="text-2xl font-bold text-yellow-500 flex items-center gap-2 mb-6"
             >
               <IoAirplane className="text-3xl" />
-              <span>Booking</span>
+              <span>{t("brand")}</span>
             </a>
-            <p className="text-gray-600 mb-6">
-              Book your trip in minutes, get full control for much longer.
-            </p>
+            <p className="text-gray-600 mb-6">{t("slogan")}</p>
             <div className="flex space-x-4">
               <a
                 href="#"
@@ -48,14 +49,14 @@ const Footer = () => {
 
           {/* Links */}
           <div>
-            <h3 className="font-bold text-lg mb-6">Company</h3>
+            <h3 className="font-bold text-lg mb-6">{t("company")}</h3>
             <ul className="space-y-4">
               <li>
                 <a
                   href="#"
                   className="text-gray-600 hover:text-yellow-500 transition duration-300"
                 >
-                  About
+                  {t("about")}
                 </a>
               </li>
               <li>
@@ -63,7 +64,7 @@ const Footer = () => {
                   href="#"
                   className="text-gray-600 hover:text-yellow-500 transition duration-300"
                 >
-                  Careers
+                  {t("careers")}
                 </a>
               </li>
               <li>
@@ -71,21 +72,21 @@ const Footer = () => {
                   href="#"
                   className="text-gray-600 hover:text-yellow-500 transition duration-300"
                 >
-                  Mobile
+                  {t("mobile")}
                 </a>
               </li>
             </ul>
           </div>
 
           <div>
-            <h3 className="font-bold text-lg mb-6">Contact</h3>
+            <h3 className="font-bold text-lg mb-6">{t("contact")}</h3>
             <ul className="space-y-4">
               <li>
                 <a
                   href="#"
                   className="text-gray-600 hover:text-yellow-500 transition duration-300"
                 >
-                  Help/FAQ
+                  {t("help")}
                 </a>
               </li>
               <li>
@@ -93,7 +94,7 @@ const Footer = () => {
                   href="#"
                   className="text-gray-600 hover:text-yellow-500 transition duration-300"
                 >
-                  Press
+                  {t("press")}
                 </a>
               </li>
               <li>
@@ -101,21 +102,21 @@ const Footer = () => {
                   href="#"
                   className="text-gray-600 hover:text-yellow-500 transition duration-300"
                 >
-                  Partners
+                  {t("partners")}
                 </a>
               </li>
             </ul>
           </div>
 
           <div>
-            <h3 className="font-bold text-lg mb-6">More</h3>
+            <h3 className="font-bold text-lg mb-6">{t("more")}</h3>
             <ul className="space-y-4">
               <li>
                 <a
                   href="#"
                   className="text-gray-600 hover:text-yellow-500 transition duration-300"
                 >
-                  Destinations
+                  {t("destinations")}
                 </a>
               </li>
               <li>
@@ -123,7 +124,7 @@ const Footer = () => {
                   href="#"
                   className="text-gray-600 hover:text-yellow-500 transition duration-300"
                 >
-                  Blog
+                  {t("blog")}
                 </a>
               </li>
               <li>
@@ -131,7 +132,7 @@ const Footer = () => {
                   href="#"
                   className="text-gray-600 hover:text-yellow-500 transition duration-300"
                 >
-                  Sustainability
+                  {t("sustainability")}
                 </a>
               </li>
             </ul>
@@ -139,18 +140,16 @@ const Footer = () => {
         </div>
 
         <div className="border-t border-gray-200 mt-16 pt-8 flex flex-col md:flex-row justify-between items-center">
-          <p className="text-gray-600 text-sm">
-            © 2025 Booking. All rights reserved.
-          </p>
+          <p className="text-gray-600 text-sm">{t("copyright")}</p>
           <div className="flex space-x-6 mt-4 md:mt-0">
             <a href="#" className="text-gray-600 hover:text-yellow-500 text-sm">
-              Terms of Service
+              {t("terms")}
             </a>
             <a href="#" className="text-gray-600 hover:text-yellow-500 text-sm">
-              Privacy Policy
+              {t("privacy")}
             </a>
             <a href="#" className="text-gray-600 hover:text-yellow-500 text-sm">
-              Cookie Settings
+              {t("cookie")}
             </a>
           </div>
         </div>

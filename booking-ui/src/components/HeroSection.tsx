@@ -3,27 +3,28 @@
 import { IoArrowForwardOutline, IoPlayOutline } from "react-icons/io5";
 import Image from "next/image";
 import HeroImage from "@/assets/images/trippng.png";
+import { useTranslations } from "next-intl";
 
 const HeroSection = () => {
+  const t = useTranslations("hero");
+
   return (
     <div className="min-h-screen py-16 flex flex-col lg:flex-row items-center gap-12">
       {/* Left Content */}
       <div className="w-full lg:w-1/2 flex flex-col justify-center space-y-8">
         <span className="text-yellow-500 font-semibold text-lg tracking-wide">
-          BEST DESTINATIONS AROUND THE WORLD
+          {t("bestDestinations")}
         </span>
         <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight">
-          Travel, enjoy and live a new and full life
+          {t("headline")}
         </h1>
         <p className="text-gray-600 text-base leading-relaxed max-w-lg">
-          Discover amazing places at exclusive deals. Travel to the most iconic
-          destinations with our premium services and support throughout your
-          journey.
+          {t("desc")}
         </p>
         <div className="flex flex-col sm:flex-row items-center gap-6">
           {/* Button 1 */}
           <button className="w-full sm:w-auto px-8 py-4 bg-yellow-500 text-white font-medium rounded-lg shadow-lg hover:bg-yellow-600 transition duration-300 flex items-center justify-center gap-2">
-            <span>Explore Now</span>
+            <span>{t("explore")}</span>
             <IoArrowForwardOutline />
           </button>
           {/* Button 2 */}
@@ -32,7 +33,7 @@ const HeroSection = () => {
               <IoPlayOutline size={20} />
             </div>
             <span className="text-gray-800 font-medium group-hover:text-yellow-500 transition duration-300">
-              Watch Demo
+              {t("watchDemo")}
             </span>
           </div>
         </div>

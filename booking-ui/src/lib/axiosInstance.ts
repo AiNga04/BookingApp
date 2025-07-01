@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const server = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8080";
+const server = process.env.NODE_ENV || "http://localhost:8080";
 
 const getJwt = () => localStorage.getItem("jwt") || "";
 

@@ -1,8 +1,10 @@
 "use client";
 import "@/assets/globals.css";
 import React, { useState } from "react";
+import { useTranslations } from "next-intl";
 
 const RegisterPage = () => {
+  const t = useTranslations("register");
   const [form, setForm] = useState({
     username: "",
     email: "",
@@ -19,18 +21,17 @@ const RegisterPage = () => {
 
   const validate = () => {
     const newErrors: { [key: string]: string } = {};
-    if (!form.username) newErrors.username = "Username is required";
-    if (!form.email) newErrors.email = "Email is required";
+    if (!form.username) newErrors.username = t("username_required");
+    if (!form.email) newErrors.email = t("email_required");
     else if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(form.email))
-      newErrors.email = "Invalid email";
-    if (!form.firstName) newErrors.firstName = "First name is required";
-    if (!form.lastName) newErrors.lastName = "Last name is required";
-    if (!form.password) newErrors.password = "Password is required";
-    else if (form.password.length < 6)
-      newErrors.password = "Password must be at least 6 characters";
-    if (!form.rePassword) newErrors.rePassword = "Please confirm your password";
+      newErrors.email = t("email_invalid");
+    if (!form.firstName) newErrors.firstName = t("firstName_required");
+    if (!form.lastName) newErrors.lastName = t("lastName_required");
+    if (!form.password) newErrors.password = t("password_required");
+    else if (form.password.length < 6) newErrors.password = t("password_min");
+    if (!form.rePassword) newErrors.rePassword = t("rePassword_required");
     else if (form.password !== form.rePassword)
-      newErrors.rePassword = "Passwords do not match";
+      newErrors.rePassword = t("rePassword_not_match");
     return newErrors;
   };
 
@@ -51,9 +52,7 @@ const RegisterPage = () => {
           <span className="text-yellow-500 text-4xl font-bold mb-2">
             Booking
           </span>
-          <h1 className="text-2xl font-bold text-gray-900">
-            Create your account
-          </h1>
+          <h1 className="text-2xl font-bold text-gray-900">{t("title")}</h1>
         </div>
         <form className="space-y-5" onSubmit={handleSubmit} noValidate>
           <div>
@@ -61,7 +60,7 @@ const RegisterPage = () => {
               htmlFor="username"
               className="block text-sm font-medium text-gray-700"
             >
-              Username
+              {t("username")}
             </label>
             <input
               type="text"
@@ -85,7 +84,7 @@ const RegisterPage = () => {
                 htmlFor="firstName"
                 className="block text-sm font-medium text-gray-700"
               >
-                First Name
+                {t("firstName")}
               </label>
               <input
                 type="text"
@@ -108,7 +107,7 @@ const RegisterPage = () => {
                 htmlFor="lastName"
                 className="block text-sm font-medium text-gray-700"
               >
-                Last Name
+                {t("lastName")}
               </label>
               <input
                 type="text"
@@ -132,7 +131,7 @@ const RegisterPage = () => {
               htmlFor="email"
               className="block text-sm font-medium text-gray-700"
             >
-              Email address
+              {t("email")}
             </label>
             <input
               type="email"
@@ -155,7 +154,7 @@ const RegisterPage = () => {
               htmlFor="password"
               className="block text-sm font-medium text-gray-700"
             >
-              Password
+              {t("password")}
             </label>
             <input
               type="password"
@@ -178,7 +177,7 @@ const RegisterPage = () => {
               htmlFor="rePassword"
               className="block text-sm font-medium text-gray-700"
             >
-              Confirm Password
+              {t("rePassword")}
             </label>
             <input
               type="password"
@@ -200,16 +199,16 @@ const RegisterPage = () => {
             type="submit"
             className="w-full bg-yellow-500 text-white font-semibold py-2 px-4 rounded-md hover:bg-yellow-600 transition duration-200 shadow"
           >
-            Sign Up
+            {t("submit")}
           </button>
         </form>
         <div className="text-center text-sm text-gray-500 mt-4">
-          Already have an account?{" "}
+          {t("already_have_account")}{" "}
           <a
             href="/auth/login"
             className="text-yellow-500 hover:text-yellow-600 font-medium"
           >
-            Sign in
+            {t("login")}
           </a>
         </div>
       </div>

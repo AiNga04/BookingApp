@@ -2,8 +2,11 @@
 import "@/assets/globals.css";
 import React, { useState } from "react";
 import { postWithHeader } from "@/lib/axiosInstance";
+import { useTranslations } from "next-intl";
 
 const LoginPage = () => {
+  const t = useTranslations("login");
+
   const [form, setForm] = useState({ username: "", password: "" });
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
   const [loading, setLoading] = useState(false);
@@ -16,8 +19,8 @@ const LoginPage = () => {
 
   const validate = () => {
     const newErrors: { [key: string]: string } = {};
-    if (!form.username) newErrors.username = "Username is required";
-    if (!form.password) newErrors.password = "Password is required";
+    if (!form.username) newErrors.username = t("username_required");
+    if (!form.password) newErrors.password = t("password_required");
     return newErrors;
   };
 
@@ -54,8 +57,8 @@ const LoginPage = () => {
           <span className="text-yellow-500 text-4xl font-bold mb-2">
             Booking
           </span>
-          <h1 className="text-2xl font-bold text-gray-900">
-            Sign in to your account
+          <h1 className="text-2xl font-bold text-gray-900 text-center">
+            {t("title")}
           </h1>
         </div>
         <form className="space-y-6" onSubmit={handleSubmit} noValidate>
@@ -64,7 +67,7 @@ const LoginPage = () => {
               htmlFor="username"
               className="block text-sm font-medium text-gray-700"
             >
-              Username
+              {t("username")}
             </label>
             <input
               type="text"
@@ -87,7 +90,7 @@ const LoginPage = () => {
               htmlFor="password"
               className="block text-sm font-medium text-gray-700"
             >
-              Password
+              {t("password")}
             </label>
             <input
               type="password"
@@ -117,7 +120,7 @@ const LoginPage = () => {
                 htmlFor="remember-me"
                 className="ml-2 block text-sm text-gray-600"
               >
-                Remember me
+                {t("remember")}
               </label>
             </div>
             <div className="text-sm">
@@ -125,27 +128,29 @@ const LoginPage = () => {
                 href="#"
                 className="font-medium text-yellow-500 hover:text-yellow-600"
               >
-                Forgot your password?
+                {t("forgot")}
               </a>
             </div>
           </div>
-          {error && <div className="text-red-500 text-sm">{error}</div>}
-          {success && <div className="text-green-600 text-sm">{success}</div>}
+          {error && <div className="text-red-500 text-sm">{t("fail")}</div>}
+          {success && (
+            <div className="text-green-600 text-sm">{t("success")}</div>
+          )}
           <button
             disabled={loading}
             type="submit"
             className="w-full bg-yellow-500 text-white font-semibold py-2 px-4 rounded-md hover:bg-yellow-600 transition duration-200 shadow"
           >
-            {loading ? "Looding..." : "Sign In"}
+            {loading ? "Loading..." : t("submit")}
           </button>
         </form>
         <div className="text-center text-sm text-gray-500 mt-4">
-          Don't have an account?{" "}
+          {t("no_account")}{" "}
           <a
             href="/auth/register"
             className="text-yellow-500 hover:text-yellow-600 font-medium"
           >
-            Sign up
+            {t("signup")}
           </a>
         </div>
       </div>
