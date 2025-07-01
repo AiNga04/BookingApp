@@ -1,5 +1,7 @@
 package com.booking.hotelservice.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -40,5 +42,6 @@ public class Hotel {
   private Long userId;
 
   @OneToMany(mappedBy = "hotel")
+  @JsonManagedReference
   private List<Room> rooms = new ArrayList<>();
 }

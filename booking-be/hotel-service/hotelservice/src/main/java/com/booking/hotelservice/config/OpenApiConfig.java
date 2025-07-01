@@ -1,4 +1,4 @@
-package com.booking.userservice.config;
+package com.booking.hotelservice.config;
 
 import io.swagger.v3.oas.models.OpenAPI;
 import org.springframework.context.annotation.Bean;
