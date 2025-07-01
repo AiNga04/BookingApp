@@ -1,7 +1,7 @@
 package com.booking.hotelservice.controller;
 
 import com.booking.hotelservice.dto.HotelDTO;
-import com.booking.hotelservice.dto.ResponseSuccess;
+import com.booking.hotelservice.dto.response.ResponseSuccess;
 import com.booking.hotelservice.mapper.HotelMapper;
 import com.booking.hotelservice.model.Hotel;
 import com.booking.hotelservice.service.HotelService;
@@ -41,6 +41,12 @@ public class HotelController {
         .map(hotelMapper::toDTO)
         .map(dto -> new ResponseSuccess(HttpStatus.OK, "Hotel found", dto))
         .orElseThrow(() -> new RuntimeException("Hotel not found"));
+  }
+
+  @GetMapping("{id}/rooms")
+  public ResponseSuccess getHotelRooms(@PathVariable Long id) {
+
+    return new ResponseSuccess(HttpStatus.OK, "Get rooms by hotel id successfully", hotelService.getRoomByHotelId(id));
   }
 
   @PostMapping

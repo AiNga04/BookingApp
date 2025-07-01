@@ -1,6 +1,7 @@
 package com.booking.hotelservice.model;
 
 import com.booking.hotelservice.enums.TypeRoom;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -35,5 +36,6 @@ public class Room {
 
   @ManyToOne
   @JoinColumn(name = "hotel_id", nullable = false)
+  @JsonBackReference
   private Hotel hotel;
 }

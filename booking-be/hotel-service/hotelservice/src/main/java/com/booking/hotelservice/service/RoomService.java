@@ -1,6 +1,11 @@
 package com.booking.hotelservice.service;
 
+import com.booking.hotelservice.dto.RoomDTO;
+import com.booking.hotelservice.exception.ResourceNotFoundException;
+import com.booking.hotelservice.mapper.RoomMapper;
+import com.booking.hotelservice.model.Hotel;
 import com.booking.hotelservice.model.Room;
+import com.booking.hotelservice.repository.HotelRepository;
 import com.booking.hotelservice.repository.RoomRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -14,7 +19,9 @@ import java.util.Optional;
 @Transactional
 public class RoomService {
 
+  private final HotelRepository hotelRepository;
   private final RoomRepository roomRepository;
+  private final RoomMapper roomMapper;
 
   public List<Room> getAllRooms() {
     return roomRepository.findAll();
@@ -24,18 +31,21 @@ public class RoomService {
     return roomRepository.findById(id);
   }
 
-  public Room createRoom(Room room) {
-    return roomRepository.save(room);
+
+  public Room createRoom(RoomDTO room) {
+
+    return roomRepository.save(roomMapper.toRoom(room));
   }
 
-  public Room updateRoom(Long id, Room updatedRoom) {
+  public Room updateRoom(Long id, RoomDTO updatedRoom) {
+    Hotel hotel = hotelRepository.findById(updatedRoom.getHotelId()).orElseThrow(() -> new ResourceNotFoundException("Hotel not found with id: " + updatedRoom.getHotelId()));
     return roomRepository.findById(id)
         .map(room -> {
           room.setTypeRoom(updatedRoom.getTypeRoom());
           room.setCapacity(updatedRoom.getCapacity());
           room.setPricePerNight(updatedRoom.getPricePerNight());
           room.setAvailable(updatedRoom.isAvailable());
-          room.setHotel(updatedRoom.getHotel());
+          room.setHotel(hotel);
           return roomRepository.save(room);
         })
         .orElseThrow(() -> new RuntimeException("Room not found"));

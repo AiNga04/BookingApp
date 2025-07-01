@@ -1,4 +1,4 @@
-package com.booking.hotelservice.dto;
+package com.booking.hotelservice.dto.response;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import org.springframework.http.HttpStatus;

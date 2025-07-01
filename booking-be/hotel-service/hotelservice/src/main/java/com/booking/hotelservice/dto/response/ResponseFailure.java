@@ -1,4 +1,4 @@
-package com.booking.hotelservice.dto;
+package com.booking.hotelservice.dto.response;
 
 import org.springframework.http.HttpStatus;
 
