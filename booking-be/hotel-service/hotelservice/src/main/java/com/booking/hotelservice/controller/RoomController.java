@@ -1,5 +1,6 @@
 package com.booking.hotelservice.controller;
 
+import com.booking.hotelservice.dto.HotelDTO;
 import com.booking.hotelservice.dto.response.ResponseSuccess;
 import com.booking.hotelservice.dto.RoomDTO;
 import com.booking.hotelservice.exception.ResourceNotFoundException;
@@ -12,6 +13,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import org.springframework.web.multipart.MultipartFile;
 
 @RestController
 @RequestMapping("/api/v1/rooms")
@@ -35,8 +37,11 @@ public class RoomController {
 
 
   @PostMapping
-  public ResponseSuccess createRoom(@Valid @RequestBody RoomDTO room) {
-    Room created = roomService.createRoom(room);
+  public ResponseSuccess createRoom(
+      @RequestPart(value = "room") @Valid RoomDTO room,
+      @RequestPart(value = "images", required = false) MultipartFile[] images
+  ) {
+    Room created = roomService.createRoom(room, images);
     return new ResponseSuccess(HttpStatus.CREATED, "Room created successfully", created);
   }
 

@@ -1,8 +1,10 @@
 package com.booking.userservice.dto.request;
 
+import com.booking.userservice.enums.RoleType;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
+import lombok.Builder.Default;
 import lombok.Data;
 
 @Data
@@ -31,4 +33,5 @@ public class CreateUserAccountRequest {
   @NotBlank(message = "Password confirmation is required")
   @Size(min = 6, max = 100, message = "Password confirmation must be between 6 and 100 characters")
   private String rePassword;
+
 }

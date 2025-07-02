@@ -1,5 +1,7 @@
 package com.booking.userservice.dto.request;
 
+import com.booking.userservice.enums.RoleType;
+import com.booking.userservice.validation.ValidRoleType;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -50,4 +52,6 @@ public class CreateUserRequest {
   @NotNull(message = "Gender is required")
   private Boolean gender;
 
+  @ValidRoleType
+  private RoleType roleType;
 }
