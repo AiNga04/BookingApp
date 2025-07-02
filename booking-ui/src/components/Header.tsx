@@ -51,7 +51,7 @@ const Header: React.FC = () => {
       <div className="max-w-7xl mx-auto flex justify-between items-center px-4 py-3 sm:px-6 lg:px-8">
         {/* Logo */}
         <a
-          href="#"
+          href="/"
           className="text-2xl font-bold text-yellow-500 flex items-center gap-2"
         >
           <IoAirplane className="text-3xl" />

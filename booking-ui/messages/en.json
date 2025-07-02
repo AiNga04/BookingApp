@@ -35,7 +35,10 @@
     "rePassword_required": "Please re-enter your password",
     "rePassword_not_match": "Passwords do not match",
     "already_have_account": "Already have an account?",
-    "login": "Sign In"
+    "login": "Sign In",
+    "agree_terms": "I agree to the ",
+    "terms_of_service": "Terms of Service",
+    "terms_of_service_content": "Your terms of service content goes here. You can write your terms in detail and support multiple languages by adding translations in each locale file."
   },
 
   "header": {

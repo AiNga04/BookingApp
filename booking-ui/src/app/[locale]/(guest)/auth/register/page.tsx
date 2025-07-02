@@ -12,6 +12,7 @@ const RegisterPage = () => {
     lastName: "",
     password: "",
     rePassword: "",
+    agree: false,
   });
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
 
@@ -194,6 +195,25 @@ const RegisterPage = () => {
             {errors.rePassword && (
               <p className="text-red-500 text-xs mt-1">{errors.rePassword}</p>
             )}
+          </div>
+          <div className="flex items-center mb-4">
+            <input
+              type="checkbox"
+              name="agree"
+              checked={form.agree}
+              onChange={handleChange}
+              className="mr-2"
+              required
+            />
+            <span className="text-sm text-gray-600">
+              {t("agree_terms")}
+              <a
+                href="./terms-of-service"
+                className="text-yellow-500 hover:text-yellow-600 font-medium underline"
+              >
+                {t("terms_of_service")}
+              </a>
+            </span>
           </div>
           <button
             type="submit"
