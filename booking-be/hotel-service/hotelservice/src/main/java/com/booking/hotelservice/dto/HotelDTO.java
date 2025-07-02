@@ -24,5 +24,5 @@ public class HotelDTO {
   @DecimalMin(value = "0.0", message = "Sao đánh giá phải >= 0")
   private double starRating;
 
-  private Long userId;
+  private String imageUrl;
 }

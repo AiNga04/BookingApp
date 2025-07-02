@@ -4,13 +4,18 @@ import com.booking.hotelservice.dto.HotelDTO;
 import com.booking.hotelservice.exception.ResourceNotFoundException;
 import com.booking.hotelservice.mapper.HotelMapper;
 import com.booking.hotelservice.model.Hotel;
+import com.booking.hotelservice.model.Room;
 import com.booking.hotelservice.repository.HotelRepository;
+import com.booking.hotelservice.repository.RoomRepository;
 import jakarta.transaction.Transactional;
+import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 @Service
 @RequiredArgsConstructor
@@ -18,7 +23,9 @@ import org.springframework.stereotype.Service;
 public class HotelService {
 
   private final HotelRepository hotelRepository;
+  private final RoomRepository roomRepository;
   private final HotelMapper hotelMapper;
+  private final CloudinaryService cloudinaryService;
 
   public Page<Hotel> getAllHotels(Pageable pageable) {
     return hotelRepository.findAll(pageable);
@@ -29,10 +36,23 @@ public class HotelService {
         .orElseThrow(() -> new ResourceNotFoundException("Hotel not found")));
   }
 
-  public Hotel createHotel(HotelDTO hotelDTO) {
+  public List<Room> getRoomByHotelId(Long hotelId) {
+    hotelRepository.findById(hotelId).orElseThrow(() -> new ResourceNotFoundException("Hotel not found"));
+
+    return roomRepository.findByHotelId(hotelId);
+  }
+
+  public Hotel createHotel(HotelDTO hotelDTO, MultipartFile imageHotel) {
     Hotel hotel = hotelMapper.toHotel(hotelDTO);
     hotel.setCreatedAt(java.time.LocalDateTime.now());
     hotel.setUpdatedAt(java.time.LocalDateTime.now());
+
+    if (imageHotel != null && !imageHotel.isEmpty()) {
+      Map data = this.cloudinaryService.upload(imageHotel);
+      String imageUrl = (String) data.get("secure_url");
+      hotel.setImageUrl(imageUrl);
+    }
+
     return hotelRepository.save(hotel);
   }
 
@@ -52,8 +72,6 @@ public class HotelService {
     target.setAddressDetail(source.getAddressDetail());
     target.setTotalRooms(source.getTotalRooms());
     target.setStarRating(source.getStarRating());
-    target.setDeleted(source.isDeleted());
-    target.setUserId(source.getUserId());
   }
 
   public void deleteHotel(Long id) throws ResourceNotFoundException {

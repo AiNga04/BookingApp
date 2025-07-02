@@ -12,12 +12,13 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 @ControllerAdvice
 public class GlobalExceptionHandler {
 
-  @ExceptionHandler({UserNotFoundException.class})
-  public ResponseFailure handleStudentNotFoundException(UserNotFoundException exception) {
+  @ExceptionHandler({ UserNotFoundException.class, RoleTypeNotFoundException.class })
+  public ResponseFailure handleNotFoundException(Exception exception) {
     return new ResponseFailure(HttpStatus.NOT_FOUND, exception.getMessage());
   }
 
-  @ExceptionHandler({UserAlreadyExistsException.class})
+
+  @ExceptionHandler({ UserAlreadyExistsException.class })
   public ResponseFailure handleStudentAlreadyExistsException(UserAlreadyExistsException exception) {
     return new ResponseFailure(HttpStatus.CONFLICT, exception.getMessage());
   }
@@ -27,7 +28,7 @@ public class GlobalExceptionHandler {
     return new ResponseFailure(HttpStatus.BAD_REQUEST, exception.getMessage());
   }
 
-  @ExceptionHandler({RuntimeException.class})
+  @ExceptionHandler({ RuntimeException.class })
   public ResponseFailure handleRuntimeException(RuntimeException exception) {
     return new ResponseFailure(HttpStatus.INTERNAL_SERVER_ERROR, exception.getMessage());
   }

@@ -1,7 +1,7 @@
 package com.booking.hotelservice.controller;
 
 import com.booking.hotelservice.dto.HotelDTO;
-import com.booking.hotelservice.dto.ResponseSuccess;
+import com.booking.hotelservice.dto.response.ResponseSuccess;
 import com.booking.hotelservice.mapper.HotelMapper;
 import com.booking.hotelservice.model.Hotel;
 import com.booking.hotelservice.service.HotelService;
@@ -12,7 +12,10 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 @RestController
 @RequestMapping("/api/v1/hotels")
@@ -43,11 +46,21 @@ public class HotelController {
         .orElseThrow(() -> new RuntimeException("Hotel not found"));
   }
 
+  @GetMapping("{id}/rooms")
+  public ResponseSuccess getHotelRooms(@PathVariable Long id) {
+
+    return new ResponseSuccess(HttpStatus.OK, "Get rooms by hotel id successfully", hotelService.getRoomByHotelId(id));
+  }
+
   @PostMapping
-  public ResponseSuccess createHotel(@Valid @RequestBody HotelDTO hotel) {
-    Hotel created = hotelService.createHotel(hotel);
+  public ResponseSuccess createHotel(
+      @RequestPart(value = "hotel", required = false) @Valid HotelDTO hotel,
+      @RequestPart(name = "image", required = false) MultipartFile imageHotel
+  ) {
+    Hotel created = hotelService.createHotel(hotel, imageHotel);
     return new ResponseSuccess(HttpStatus.CREATED, "Hotel created successfully", created);
   }
+
 
   @PutMapping("/{id}")
   public ResponseSuccess updateHotel(@PathVariable Long id, @Valid @RequestBody Hotel hotel) {

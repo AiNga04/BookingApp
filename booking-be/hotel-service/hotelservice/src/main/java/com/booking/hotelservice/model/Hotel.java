@@ -1,5 +1,8 @@
 package com.booking.hotelservice.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -31,14 +34,13 @@ public class Hotel {
   private String addressDetail;
   private int totalRooms;
   private double starRating;
+  private String imageUrl;
 
   private LocalDateTime createdAt;
   private LocalDateTime updatedAt;
   private LocalDateTime deletedAt;
-  private boolean isDeleted;
 
-  private Long userId;
-
-  @OneToMany(mappedBy = "hotel")
+  @OneToMany(mappedBy = "hotel", cascade = CascadeType.ALL, orphanRemoval = true)
+  @JsonManagedReference
   private List<Room> rooms = new ArrayList<>();
 }
