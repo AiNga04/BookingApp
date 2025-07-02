@@ -27,9 +27,9 @@ public class HotelController {
 
   @GetMapping
   public ResponseSuccess getAllHotels(
-      @RequestParam(defaultValue = "0") int page,
-      @RequestParam(defaultValue = "10") int size,
-      @RequestParam(defaultValue = "id") String sort) {
+      @RequestParam(defaultValue = "0", required = false) int page,
+      @RequestParam(defaultValue = "10", required = false) int size,
+      @RequestParam(defaultValue = "id", required = false) String sort) {
 
     Pageable pageable = PageRequest.of(page, size, Sort.by(sort));
     Page<HotelDTO> hotelPage = hotelService.getAllHotels(pageable)

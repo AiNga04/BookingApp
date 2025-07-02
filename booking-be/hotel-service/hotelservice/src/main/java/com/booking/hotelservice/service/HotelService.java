@@ -48,9 +48,13 @@ public class HotelService {
     hotel.setUpdatedAt(java.time.LocalDateTime.now());
 
     if (imageHotel != null && !imageHotel.isEmpty()) {
-      Map data = this.cloudinaryService.upload(imageHotel);
-      String imageUrl = (String) data.get("secure_url");
-      hotel.setImageUrl(imageUrl);
+      try {
+        Map data = this.cloudinaryService.upload(imageHotel);
+        String imageUrl = (String) data.get("secure_url");
+        hotel.setImageUrl(imageUrl);
+      } catch (Exception e) {
+        throw new RuntimeException("Failed to upload image: " + imageHotel.getOriginalFilename());
+      }
     }
 
     return hotelRepository.save(hotel);

@@ -3,6 +3,7 @@ package com.booking.authservice.client;
 import com.booking.authservice.dto.request.LoginRequest;
 import com.booking.authservice.dto.request.RegisterRequest;
 import com.booking.authservice.dto.response.UserResponse;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
@@ -19,6 +20,7 @@ import org.springframework.web.server.ResponseStatusException;
 public class UserServiceClient {
 
   private final RestTemplate restTemplate;
+  private final ObjectMapper objectMapper;
 
   @Value("${user.service.url}")
   private String userServiceUrl;
@@ -27,15 +29,23 @@ public class UserServiceClient {
     String url = userServiceUrl + "/validate-credentials";
 
     try {
-      ResponseEntity<UserResponse> response = restTemplate.exchange(
+      ResponseEntity<String> response = restTemplate.exchange(
           url,
           HttpMethod.POST,
           new HttpEntity<>(loginRequest),
-          UserResponse.class
+          String.class
       );
 
+      System.out.println("RAW RESPONSE BODY: " + response.getBody());
+
       if (response.getStatusCode().is2xxSuccessful()) {
-        return response.getBody();
+        String body = response.getBody();
+        try {
+          UserResponse user = objectMapper.readValue(body, UserResponse.class);
+          return user;
+        } catch (Exception e) {
+          throw new RuntimeException("Failed to parse UserResponse JSON", e);
+        }
       } else {
         throw new ResponseStatusException(
             response.getStatusCode(),
