@@ -1,5 +1,6 @@
 package com.booking.userservice.dto.response;
 
+import com.booking.userservice.enums.RoleType;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import lombok.Builder;
@@ -22,5 +23,6 @@ public class UserResponse {
   private LocalDateTime updatedAt;
   private LocalDateTime deletedAt;
   private boolean isDeleted;
+  private RoleType roleType;
 
 }

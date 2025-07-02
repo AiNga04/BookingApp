@@ -12,7 +12,10 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 @RestController
 @RequestMapping("/api/v1/hotels")
@@ -50,10 +53,14 @@ public class HotelController {
   }
 
   @PostMapping
-  public ResponseSuccess createHotel(@Valid @RequestBody HotelDTO hotel) {
-    Hotel created = hotelService.createHotel(hotel);
+  public ResponseSuccess createHotel(
+      @RequestPart(value = "hotel", required = false) @Valid HotelDTO hotel,
+      @RequestPart(name = "image", required = false) MultipartFile imageHotel
+  ) {
+    Hotel created = hotelService.createHotel(hotel, imageHotel);
     return new ResponseSuccess(HttpStatus.CREATED, "Hotel created successfully", created);
   }
+
 
   @PutMapping("/{id}")
   public ResponseSuccess updateHotel(@PathVariable Long id, @Valid @RequestBody Hotel hotel) {

@@ -32,7 +32,8 @@ public class UserService {
   UserMapper userMapper;
 
 
-  public void createUser(CreateUserRequest req) throws UserAlreadyExistsException, PasswordsNotMatchException {
+  public void createUser(CreateUserRequest req)
+      throws UserAlreadyExistsException, PasswordsNotMatchException {
     boolean exists = userRepository.findByUsername(req.getUsername()).isPresent();
 
     if (exists) {

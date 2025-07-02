@@ -4,6 +4,8 @@ import com.booking.hotelservice.enums.TypeRoom;
 import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
+import java.util.ArrayList;
+import java.util.List;
 import lombok.Data;
 
 @Data
@@ -22,4 +24,5 @@ public class RoomDTO {
 
   @NotNull(message = "HotelId không được để trống")
   private Long hotelId;
-}
+
+  private List<String> listImageUrl = new ArrayList<>();}
