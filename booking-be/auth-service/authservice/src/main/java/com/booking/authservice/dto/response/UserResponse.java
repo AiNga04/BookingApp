@@ -22,5 +22,5 @@ public class UserResponse {
   private LocalDateTime updatedAt;
   private LocalDateTime deletedAt;
   private boolean deleted;
-  private RoleType roleType;
+  private String roleType;
 }

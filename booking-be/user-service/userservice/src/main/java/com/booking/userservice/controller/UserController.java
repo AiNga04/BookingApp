@@ -59,12 +59,12 @@ public class UserController {
   }
 
   @GetMapping("/{id}")
-  ResponseSuccess getUser(@PathVariable Long id) {
+  ResponseSuccess getUser(@PathVariable("id") Long id) {
     return new ResponseSuccess(HttpStatus.OK, "Get user successfully", userService.getUserById(id));
   }
 
   @PutMapping("/{id}")
-  ResponseSuccess updateUser(@PathVariable Long id, @Valid @RequestBody UpdateUserRequest req) {
+  ResponseSuccess updateUser(@PathVariable("id") Long id, @Valid @RequestBody UpdateUserRequest req) {
 
     userService.updateUser(id, req);
     return new ResponseSuccess(HttpStatus.OK, "Update user successfully");
@@ -72,7 +72,7 @@ public class UserController {
 
   @DeleteMapping("/{id}")
   ResponseSuccess deleteUser(
-      @PathVariable Long id,
+      @PathVariable("id") Long id,
       @RequestParam(defaultValue = "false") boolean soft
   ) {
     if (soft) {
@@ -86,9 +86,8 @@ public class UserController {
 
   @PostMapping("/validate-credentials")
   UserResponse validateCredentials(@Valid @RequestBody LoginRequest req) {
-    UserResponse userResponse = userService.validateCredentials(req);
 
-    return userResponse;
+    return userService.validateCredentials(req);
   }
 
   @PostMapping("/register")

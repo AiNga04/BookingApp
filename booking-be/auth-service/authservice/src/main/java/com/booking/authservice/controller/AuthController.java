@@ -12,6 +12,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,12 +31,22 @@ public class AuthController {
   @PostMapping("/login")
   ResponseSuccess login(@Valid @RequestBody LoginRequest loginRequest) {
 
-    System.out.println("hehehe");
     UserResponse userResponse = userServiceClient.login(loginRequest);
 
-    String token = jwtService.generateToken(userResponse.getUsername(), userResponse.getRoleType().name());
+    String token = jwtService.generateToken(userResponse.getUsername(), userResponse.getRoleType());
     return new ResponseSuccess(HttpStatus.OK, "Login successfully", token);
 
+  }
+
+  @GetMapping("/refresh-token")
+  ResponseSuccess getRefreshToken(String refreshToken) {
+
+    if (!refreshToken.isEmpty()) {
+      String token = jwtService.refreshToken(refreshToken);
+      return new ResponseSuccess(HttpStatus.OK, "Refresh token successfully", token);
+    }
+
+    return new ResponseSuccess(HttpStatus.UNAUTHORIZED, "Refresh token is empty");
   }
 
   @PostMapping("/register")

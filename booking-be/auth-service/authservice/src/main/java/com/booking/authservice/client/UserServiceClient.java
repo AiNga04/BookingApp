@@ -3,11 +3,16 @@ package com.booking.authservice.client;
 import com.booking.authservice.dto.request.LoginRequest;
 import com.booking.authservice.dto.request.RegisterRequest;
 import com.booking.authservice.dto.response.UserResponse;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpClientErrorException;
@@ -29,27 +34,43 @@ public class UserServiceClient {
     String url = userServiceUrl + "/validate-credentials";
 
     try {
+      HttpHeaders headers = new HttpHeaders();
+      headers.setContentType(MediaType.APPLICATION_JSON);
+      HttpEntity<LoginRequest> requestEntity = new HttpEntity<>(loginRequest, headers);
+
       ResponseEntity<String> response = restTemplate.exchange(
           url,
           HttpMethod.POST,
-          new HttpEntity<>(loginRequest),
+          requestEntity,
           String.class
       );
 
-      System.out.println("RAW RESPONSE BODY: " + response.getBody());
+      System.out.println("Response Status: " + response.getStatusCode());
+      System.out.println("Response Body: " + response.getBody());
 
-      if (response.getStatusCode().is2xxSuccessful()) {
-        String body = response.getBody();
-        try {
-          UserResponse user = objectMapper.readValue(body, UserResponse.class);
-          return user;
-        } catch (Exception e) {
-          throw new RuntimeException("Failed to parse UserResponse JSON", e);
+      String body = response.getBody();
+      if (body == null || body.isEmpty()) {
+        throw new RuntimeException("Response body is null or empty");
+      }
+
+      try {
+        JsonNode jsonNode = objectMapper.readTree(body);
+        int statusCode = jsonNode.get("status").asInt();
+        System.out.println("Status field in body: " + statusCode);
+
+        if (statusCode == 200) {
+          return objectMapper.readValue(body, UserResponse.class);
+        } else {
+          throw new ResponseStatusException(
+              HttpStatus.UNAUTHORIZED,
+              "API returned status: " + statusCode
+          );
         }
-      } else {
+      } catch (JsonProcessingException e) {
         throw new ResponseStatusException(
-            response.getStatusCode(),
-            "API returned status: " + response.getStatusCode()
+            HttpStatus.INTERNAL_SERVER_ERROR,
+            "Failed to parse JSON response",
+            e
         );
       }
 
@@ -59,10 +80,10 @@ public class UserServiceClient {
           "API error: " + ex.getResponseBodyAsString(),
           ex
       );
-    } catch (Exception ex) {
-      throw new RuntimeException("Failed to call User Service API", ex);
     }
   }
+
+
 
   public UserResponse register(final RegisterRequest registerRequest) {
     String url = userServiceUrl + "/register";
