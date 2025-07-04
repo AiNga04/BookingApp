@@ -1,0 +1,91 @@
+{
+  "login": {
+    "title": "Sign in to your account",
+    "username": "Username",
+    "password": "Password",
+    "remember": "Remember me",
+    "forgot": "Forgot your password?",
+    "submit": "Sign In",
+    "no_account": "Don't have an account?",
+    "signup": "Sign up",
+    "success": "Login successful!",
+    "fail": "Login failed",
+    "username_required": "Username is required",
+    "password_required": "Password is required"
+  },
+
+  "register": {
+    "title": "Create a new account",
+    "username": "Username",
+    "firstName": "First Name",
+    "lastName": "Last Name",
+    "email": "Email",
+    "password": "Password",
+    "rePassword": "Re-enter Password",
+    "submit": "Sign Up",
+    "success": "Registration successful!",
+    "fail": "Registration failed",
+    "firstName_required": "First name is required",
+    "lastName_required": "Last name is required",
+    "email_required": "Email is required",
+    "email_invalid": "Invalid email format",
+    "username_required": "Username is required",
+    "password_required": "Password is required",
+    "password_min": "Password must be at least 6 characters long",
+    "rePassword_required": "Please re-enter your password",
+    "rePassword_not_match": "Passwords do not match",
+    "already_have_account": "Already have an account?",
+    "login": "Sign In",
+    "agree_terms": "I agree to the ",
+    "terms_of_service": "Terms of Service",
+    "terms_of_service_content": "Your terms of service content goes here. You can write your terms in detail and support multiple languages by adding translations in each locale file."
+  },
+
+  "header": {
+    "home": "Home",
+    "about": "About",
+    "contact": "Contact",
+    "login": "Sign In",
+    "register": "Sign Up",
+    "destinations": "Destinations",
+    "services": "Services",
+    "blog": "Blog",
+    "profile": "Profile",
+    "logout": "Logout",
+    "language": "Language",
+    "switch_language": "Switch Language",
+    "en": "English",
+    "vi": "Vietnamese",
+    "booking": "Booking",
+    "testimonials": "Testimonials"
+  },
+
+  "footer": {
+    "brand": "Booking",
+    "slogan": "Book your trip in minutes, get full control for much longer.",
+    "company": "Company",
+    "about": "About",
+    "careers": "Careers",
+    "mobile": "Mobile",
+    "contact": "Contact",
+    "help": "Help/FAQ",
+    "press": "Press",
+    "partners": "Partners",
+    "more": "More",
+    "destinations": "Destinations",
+    "blog": "Blog",
+    "sustainability": "Sustainability",
+    "copyright": "© 2025 Booking. All rights reserved.",
+    "terms": "Terms of Service",
+    "privacy": "Privacy Policy",
+    "cookie": "Cookie Settings"
+  },
+
+  "hero": {
+    "bestDestinations": "BEST DESTINATIONS AROUND THE WORLD",
+    "headline": "Travel, enjoy and live a new and full life",
+    "desc": "Discover amazing places at exclusive deals. Travel to the most iconic destinations with our premium services and support throughout your journey.",
+    "explore": "Explore Now",
+    "watchDemo": "Watch Demo"
+  }
+}
