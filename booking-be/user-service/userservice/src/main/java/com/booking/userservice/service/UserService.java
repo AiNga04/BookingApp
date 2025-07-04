@@ -13,6 +13,7 @@ import com.booking.userservice.model.User;
 import com.booking.userservice.repository.UserRepository;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -110,9 +111,12 @@ public class UserService {
     return userMapper.toUserReponse(user);
   }
 
-  public UserResponse createUserAccount(CreateUserAccountRequest req)
-      throws PasswordsNotMatchException {
+  public UserResponse createUserAccount(CreateUserAccountRequest req) {
 
+    Optional<User> existUser = userRepository.findByUsername(req.getUsername());
+    if (existUser.isPresent()) {
+      throw new UserAlreadyExistsException("User already exists with username: " + req.getUsername());
+    }
     if (!req.getPassword().equals(req.getRePassword())) {
       throw new PasswordsNotMatchException();
     }

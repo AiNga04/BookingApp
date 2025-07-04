@@ -1,5 +1,6 @@
 package com.booking.authservice.exception;
 
+import com.booking.authservice.dto.response.ErrorResponse;
 import com.booking.authservice.dto.response.ResponseFailure;
 import java.util.HashMap;
 import java.util.Map;
@@ -29,7 +30,8 @@ public class GlobalExceptionHandler {
   }
 
   @ExceptionHandler(MethodArgumentNotValidException.class)
-  public ResponseEntity<Map<String, String>> handleValidationException(MethodArgumentNotValidException ex) {
+  public ResponseEntity<Map<String, String>> handleValidationException(
+      MethodArgumentNotValidException ex) {
     Map<String, String> errors = new HashMap<>();
 
     ex.getBindingResult().getFieldErrors()
@@ -39,8 +41,15 @@ public class GlobalExceptionHandler {
   }
 
   @ExceptionHandler(ResponseStatusException.class)
-  public ResponseFailure handleResponseStatusException(ResponseStatusException ex) {
+  public ResponseEntity<ErrorResponse> handleResponseStatusException(ResponseStatusException ex) {
+    ErrorResponse error = new ErrorResponse(ex.getStatusCode().value(), ex.getReason());
+    return new ResponseEntity<>(error, ex.getStatusCode());
+  }
 
-    return new ResponseFailure(HttpStatus.UNAUTHORIZED, ex.getMessage());
+  @ExceptionHandler(Exception.class)
+  public ResponseEntity<ErrorResponse> handleGenericException(Exception ex) {
+    ErrorResponse error = new ErrorResponse(HttpStatus.INTERNAL_SERVER_ERROR.value(),
+        "An unexpected error occurred");
+    return new ResponseEntity<>(error, HttpStatus.INTERNAL_SERVER_ERROR);
   }
 }
