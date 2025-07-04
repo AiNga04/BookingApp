@@ -51,7 +51,6 @@ public class UserMapper {
   }
 
   public void updateUserFromRequest(User user, UpdateUserRequest req) {
-    user.setUsername(req.getUsername());
     user.setFullName(req.getFirstName() + " " + req.getLastName());
     user.setEmail(req.getEmail());
     user.setPhoneNumber(req.getPhoneNumber());
