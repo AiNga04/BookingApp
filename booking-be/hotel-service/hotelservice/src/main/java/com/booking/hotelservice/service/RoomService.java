@@ -35,12 +35,12 @@ public class RoomService {
   }
 
 
-  public Room createRoom(RoomDTO room, MultipartFile[] imageRoom) {
+  public Room createRoom(RoomDTO room, MultipartFile[] imagesRoom) {
 
     List<String> listImageUrl = new ArrayList<>();
-    if(imageRoom != null && imageRoom.length > 0) {
+    if(imagesRoom != null && imagesRoom.length > 0) {
 
-      for (MultipartFile image : imageRoom) {
+      for (MultipartFile image : imagesRoom) {
         try {
           Map<String, Object> data = this.cloudinaryService.upload(image);
           String imageUrl = (String) data.get("secure_url");

@@ -23,6 +23,6 @@ public class UserResponse {
   private LocalDateTime updatedAt;
   private LocalDateTime deletedAt;
   private boolean isDeleted;
-  private RoleType roleType;
+  private String roleType;
 
 }

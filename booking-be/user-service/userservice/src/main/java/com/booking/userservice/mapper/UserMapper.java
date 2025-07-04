@@ -64,6 +64,7 @@ public class UserMapper {
 
   public UserResponse toUserReponse(User req) {
     return UserResponse.builder()
+        .id(req.getId())
         .username(req.getUsername())
         .fullName(req.getFullName())
         .email(req.getEmail())
@@ -72,7 +73,7 @@ public class UserMapper {
         .gender(req.getGender() == Gender.MALE)
         .isEmailVerified(false)
         .isDeleted(false)
-        .roleType(req.getRole().getRoleType())
+        .roleType(req.getRole().getRoleType().name())
         .build();
   }
 

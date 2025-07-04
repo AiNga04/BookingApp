@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.server.ResponseStatusException;
 
 @ControllerAdvice
 public class GlobalExceptionHandler {
@@ -35,5 +36,11 @@ public class GlobalExceptionHandler {
         .forEach(error -> errors.put(error.getField(), error.getDefaultMessage()));
 
     return ResponseEntity.badRequest().body(errors);
+  }
+
+  @ExceptionHandler(ResponseStatusException.class)
+  public ResponseFailure handleResponseStatusException(ResponseStatusException ex) {
+
+    return new ResponseFailure(HttpStatus.UNAUTHORIZED, ex.getMessage());
   }
 }
