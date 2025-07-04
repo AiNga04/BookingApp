@@ -66,7 +66,7 @@ const Header: React.FC = () => {
               className="flex items-center gap-1 px-2 py-1 rounded text-sm font-semibold text-gray-700 hover:bg-gray-100 min-w-[110px]"
               tabIndex={0}
             >
-              <span className="mr-1">
+              {/* <span className="mr-1">
                 {locale === "vi" ? (
                   <span className="inline-block w-5 align-middle">
                     <img
@@ -92,7 +92,7 @@ const Header: React.FC = () => {
                     />
                   </span>
                 )}
-              </span>
+              </span> */}
               <span>{locale === "vi" ? "Tiếng Việt" : "English"}</span>
               <svg
                 className="w-4 h-4 ml-1"
@@ -116,7 +116,7 @@ const Header: React.FC = () => {
                   locale === "vi" ? "font-bold bg-gray-100" : ""
                 }`}
               >
-                <img
+                {/* <img
                   src="/flags/vn.svg"
                   alt="vi"
                   className="inline w-5 h-5 mr-2"
@@ -124,7 +124,7 @@ const Header: React.FC = () => {
                     (e.target as HTMLImageElement).src =
                       "https://upload.wikimedia.org/wikipedia/commons/2/21/Flag_of_Vietnam.svg";
                   }}
-                />
+                /> */}
                 Tiếng Việt
               </button>
               <button
@@ -133,7 +133,7 @@ const Header: React.FC = () => {
                   locale === "en" ? "font-bold bg-gray-100" : ""
                 }`}
               >
-                <img
+                {/* <img
                   src="/flags/gb.svg"
                   alt="en"
                   className="inline w-5 h-5 mr-2"
@@ -141,12 +141,20 @@ const Header: React.FC = () => {
                     (e.target as HTMLImageElement).src =
                       "https://upload.wikimedia.org/wikipedia/en/a/ae/Flag_of_the_United_Kingdom.svg";
                   }}
-                />
+                /> */}
                 English
               </button>
             </div>
           </div>
 
+          <li>
+            <a
+              href="/admin"
+              className="text-gray-700 hover:text-yellow-500 transition"
+            >
+              {t("admin")}
+            </a>
+          </li>
           <li>
             <a
               href="#destinations"
@@ -209,6 +217,12 @@ const Header: React.FC = () => {
         ref={mobileMenuRef}
         className="hidden flex-col space-y-4 p-4 md:hidden bg-white border-t border-gray-100"
       >
+        <a
+          href="/admin"
+          className="text-gray-700 block hover:text-yellow-500 transition py-2"
+        >
+          {t("admin")}
+        </a>
         <a
           href="#destinations"
           className="text-gray-700 block hover:text-yellow-500 transition py-2"

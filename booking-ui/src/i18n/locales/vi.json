@@ -43,6 +43,8 @@
 
   "header": {
     "home": "Trang chủ",
+    "hotels": "Khách sạn",
+    "admin": "Quản trị",
     "about": "Giới thiệu",
     "contact": "Liên hệ",
     "login": "Đăng nhập",

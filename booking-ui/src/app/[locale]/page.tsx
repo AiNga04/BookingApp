@@ -1,6 +1,6 @@
-import * as React from "react";
-import HeroSection from "@/components/HeroSection";
-import "@/assets/globals.css";
+import * as React from 'react';
+import HeroSection from '@/components/HeroSection';
+import '@/assets/globals.css';
 
 export default function Home() {
   return (

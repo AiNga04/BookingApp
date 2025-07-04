@@ -43,6 +43,8 @@
 
   "header": {
     "home": "Home",
+    "hotels": "Hotels",
+    "admin": "Admin",
     "about": "About",
     "contact": "Contact",
     "login": "Sign In",
