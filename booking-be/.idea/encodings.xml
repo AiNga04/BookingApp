@@ -3,6 +3,7 @@
   <component name="Encoding">
     <file url="file://$PROJECT_DIR$/apigateway/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/auth-service/authservice/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/booking-service/booking-service/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/hotel-service/hotelservice/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/user-service/userservice/src/main/java" charset="UTF-8" />
   </component>

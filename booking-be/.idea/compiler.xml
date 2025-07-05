@@ -20,6 +20,7 @@
         </processorPath>
         <module name="auth-service" />
         <module name="user-service" />
+        <module name="booking-service" />
       </profile>
       <profile name="Annotation profile for hotel-service" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
@@ -41,6 +42,7 @@
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="apigateway" options="-parameters" />
       <module name="auth-service" options="-parameters" />
+      <module name="booking-service" options="-parameters" />
       <module name="hotel-service" options="-parameters" />
       <module name="user-service" options="-parameters" />
     </option>
