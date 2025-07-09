@@ -1,18 +1,20 @@
 'use client';
 
-import * as React from 'react';
 import {
-  IconCamera,
-  IconDatabase,
-  IconFileAi,
-  IconFileDescription,
-  IconFileWord,
-  IconHelp,
-  IconInnerShadowTop,
-  IconReport,
-  IconSearch,
-  IconSettings,
-} from '@tabler/icons-react';
+  LayoutDashboard,
+  Hotel,
+  BedDouble,
+  Users,
+  Camera,
+  Database,
+  FileText,
+  File,
+  HelpCircle,
+  LoaderPinwheel,
+  FileBarChart,
+  Search,
+  Settings,
+} from 'lucide-react';
 
 import { NavDocuments } from '@/components/nav-documents';
 import { NavMain } from '@/components/nav-main';
@@ -27,8 +29,7 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from '@/components/ui/sidebar';
-
-import { LayoutDashboard, Hotel, BedDouble, Users } from 'lucide-react';
+import Link from 'next/link';
 
 const data = {
   user: {
@@ -44,7 +45,7 @@ const data = {
     },
     {
       title: 'Users',
-      url: '/node_modules',
+      url: '/admin/users',
       icon: Users,
     },
     {
@@ -61,7 +62,7 @@ const data = {
   navClouds: [
     {
       title: 'Capture',
-      icon: IconCamera,
+      icon: Camera,
       isActive: true,
       url: '#',
       items: [
@@ -77,7 +78,7 @@ const data = {
     },
     {
       title: 'Proposal',
-      icon: IconFileDescription,
+      icon: FileText,
       url: '#',
       items: [
         {
@@ -92,7 +93,7 @@ const data = {
     },
     {
       title: 'Prompts',
-      icon: IconFileAi,
+      icon: FileText,
       url: '#',
       items: [
         {
@@ -110,34 +111,34 @@ const data = {
     {
       title: 'Settings',
       url: '#',
-      icon: IconSettings,
+      icon: Settings,
     },
     {
       title: 'Get Help',
       url: '#',
-      icon: IconHelp,
+      icon: HelpCircle,
     },
     {
       title: 'Search',
       url: '#',
-      icon: IconSearch,
+      icon: Search,
     },
   ],
   documents: [
     {
       name: 'Data Library',
       url: '#',
-      icon: IconDatabase,
+      icon: Database,
     },
     {
       name: 'Reports',
       url: '#',
-      icon: IconReport,
+      icon: FileBarChart,
     },
     {
       name: 'Word Assistant',
       url: '#',
-      icon: IconFileWord,
+      icon: File,
     },
   ],
 };
@@ -149,18 +150,18 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         <SidebarMenu>
           <SidebarMenuItem>
             <SidebarMenuButton asChild className="data-[slot=sidebar-menu-button]:!p-1.5">
-              <a href="#">
-                <IconInnerShadowTop className="!size-5" />
-                <span className="text-base font-semibold">Acme Inc.</span>
-              </a>
+              <Link href="./admin">
+                <LoaderPinwheel className="!size-5" />
+                <span className="text-base font-semibold">Admin Booking</span>
+              </Link>
             </SidebarMenuButton>
           </SidebarMenuItem>
         </SidebarMenu>
       </SidebarHeader>
       <SidebarContent>
-        <NavMain items={data.navMain} />
-        <NavDocuments items={data.documents} />
-        <NavSecondary items={data.navSecondary} className="mt-auto" />
+        <NavMain items={data.navMain as any} />
+        <NavDocuments items={data.documents as any} />
+        <NavSecondary items={data.navSecondary as any} className="mt-auto" />
       </SidebarContent>
       <SidebarFooter>
         <NavUser user={data.user} />
